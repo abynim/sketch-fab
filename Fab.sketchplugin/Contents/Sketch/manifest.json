@@ -1,0 +1,45 @@
+{
+  "commands" : [
+      {
+          "script" : "script.js",
+          "handler" : "handleSayHello",
+          "name" : "Say Hello",
+          "identifier" : "sayHello"
+      },
+      {
+          "script" : "script.js",
+          "handler" : "handleCountUp",
+          "identifier" : "countUp"
+      },
+      {
+          "script" : "script.js",
+          "handler" : "handleUpdateHelloButton",
+          "name" : "Update Hello Button",
+          "identifier" : "updateHelloButton"
+      },
+      {
+          "script": "script.js",
+          "handlers": {
+              "actions": {
+                  "Startup" : "handleStartup"
+              }
+          }
+      }
+  ],
+  "menu": {
+      "title" : "Fab Demo",
+      "items": [
+          "sayHello",
+          "updateHelloButton"
+      ]
+  },
+  "identifier" : "com.abynim.FabDemo",
+  "version" : "0.1",
+  "icon" : "icon.png",
+  "description" : "A demo plugin for adding a floating button on the canvas",
+  "author" : "Aby Nimbalkar",
+  "name" : "Fab Demo",
+  "disableCocoaScriptPreprocessor" : true,
+  "homepage" : "",
+  "appcast" : ""
+}
