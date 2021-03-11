@@ -35,7 +35,43 @@ const buttonWithID = function(identifier, context) {
   return buttonWithID_inDocument(identifier, nil, context)
 }
 
+const setButtonsHidden = function(buttonID, hidden, context) {
+  try {
+    return Fab.manager().setButtonsHidden_withIdentifier_context(hidden, buttonID, context);
+  }
+  catch(e) {
+    NSLog("[Fab] Could not toggle buttons with ID %@. Error: %@", buttonID, e);
+  }
+}
+
+const showAllButtonsWithButtonID = function(identifier, context) {
+  setButtonsHidden(identifier, false, context);
+}
+const hideAllButtonsWithButtonID = function(identifier, context) {
+  setButtonsHidden(identifier, true, context);
+  NSLog("Hide button with ID: %@", identifier)
+}
+
+const setAllButtonsHidden = function(hidden) {
+  try {
+    return Fab.manager().setAllButtonsHidden(hidden);
+  }
+  catch(e) {
+    NSLog("[Fab] Could not toggle buttons. Error: %@", e);
+  }
+}
+
+const showAllButtons = function() {
+  setAllButtonsHidden(false);
+}
+const hideAllButtons = function() {
+  setAllButtonsHidden(true);
+}
 
 exports.registerButton = registerButton;
 exports.buttonWithID = buttonWithID;
 exports.buttonWithID_inDocument = buttonWithID_inDocument;
+exports.showAllButtonsWithButtonID = showAllButtonsWithButtonID;
+exports.hideAllButtonsWithButtonID = hideAllButtonsWithButtonID;
+exports.showAllButtons = showAllButtons;
+exports.hideAllButtons = hideAllButtons;

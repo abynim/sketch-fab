@@ -8,10 +8,11 @@ var handleStartup = function(context) {
       // Pass in the settings for the button and the context
       // Only *required* parameter is `identifier`, which you will use later to retrieve this button
     
+    
     fab.registerButton({
       identifier : "sayHelloButton",
       action : "sayHello",
-      title: "👋",
+      title : "👋",
       backgroundColor : "rgba(255,45,45,0.6)",
       borderColor: NSColor.systemRedColor(),
       borderWidth: 1,
@@ -33,8 +34,61 @@ var handleStartup = function(context) {
       verticalPadding : 8
     }, context);
     
+    // Another example button with an image and shadow
+    fab.registerButton({
+      identifier : "toggleDarkModeButton",
+      action : "toggleDarkMode",
+      image : "images/moon.circle@2x.png",
+      imageIsTemplate : true, // template images adjust light or dark fill based on appearance
+      title : "Toggle Appearance",
+      cornerRadius : 6,
+      horizontalPadding : 6,
+      verticalPadding : 8,
+      buttonShadow : {
+        color : "rgba(0,0,0,0.3)",
+        offsetX : 0,
+        offsetY : 1,
+        blur : 2
+      }
+    }, context);
+    
   } catch (e) {
     NSLog("[Fab] Error regsitering buttons: %@", e);
+  }
+}
+
+var prepareFabForDisplay = function(context) {
+  
+  // You can setup a command to be called before a button is displayed in a newly opened document
+  // Use this method to update the state of the button if required
+  const button = context.fab;
+  if(button && button.buttonID() == "toggleDarkModeButton") {
+    const isDarkMode = NSApp.effectiveAppearance().name() == "NSAppearanceNameDarkAqua"
+    button.image = isDarkMode ? "images/sun.max@2x.png" : "images/moon.circle@2x.png"
+    button.imageIsTemplate = true;
+    button.title = isDarkMode ? "Go Light" : "Go Dark"
+  }
+  
+}
+
+var handleToggleDarkMode = function(context) {
+  
+  // Toggle dark theme
+  const theme = MSTheme.sharedTheme()
+  const darkModeScheme = theme.darkModeScheme() == 0 ? 1 : 0;
+  
+  MSTheme.setupAppearance()
+  theme.setDarkModeScheme(darkModeScheme)
+  theme.updateIsDark()
+  AppController.sharedInstance().refreshDocumentColors()
+  
+  const isDarkMode = darkModeScheme == 1;
+  
+  // update the fab
+  const button = context.fab || fab.buttonWithID("toggleDarkModeButton", context);
+  if(button) { // triggered via Fab
+    button.image = isDarkMode ? "images/sun.max@2x.png" : "images/moon.circle@2x.png"
+    button.title = isDarkMode ? "Go Light" : "Go Dark"
   }
 }
 
@@ -91,5 +145,23 @@ var handleUpdateHelloButton = function(context) {
   button.backgroundColor = "#114B8F"
   button.borderColor = NSColor.systemBlueColor()
   
+  // To hide a button in a specific document, call the show/hide function on the button itself
+//  button.isHidden() ? button.show() : button.hide();
   
+}
+
+var handleHideHelloButton = function(context) {
+  fab.hideAllButtonsWithButtonID("sayHelloButton", context)
+}
+
+var handleShowHelloButton = function(context) {
+  fab.showAllButtonsWithButtonID("sayHelloButton", context)
+}
+
+var handleHideAllButtons = function(context) {
+  fab.hideAllButtons()
+}
+
+var handleShowAllButtons = function(context) {
+  fab.showAllButtons()
 }

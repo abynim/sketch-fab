@@ -8,6 +8,12 @@
       },
       {
           "script" : "script.js",
+          "handler" : "handleToggleDarkMode",
+          "name" : "Toggle Dark Mode",
+          "identifier" : "toggleDarkMode"
+      },
+      {
+          "script" : "script.js",
           "handler" : "handleCountUp",
           "identifier" : "countUp"
       },
@@ -18,10 +24,35 @@
           "identifier" : "updateHelloButton"
       },
       {
+          "script" : "script.js",
+          "handler" : "handleHideHelloButton",
+          "name" : "Hide Hello Button",
+          "identifier" : "hideHelloButton"
+      },
+      {
+          "script" : "script.js",
+          "handler" : "handleShowHelloButton",
+          "name" : "Show Hello Button",
+          "identifier" : "showHelloButton"
+      },
+      {
+          "script" : "script.js",
+          "handler" : "handleHideAllButtons",
+          "name" : "Hide All Buttons",
+          "identifier" : "hideAllButtons"
+      },
+      {
+          "script" : "script.js",
+          "handler" : "handleShowAllButtons",
+          "name" : "Show All Buttons",
+          "identifier" : "showAllButtons"
+      },
+      {
           "script": "script.js",
           "handlers": {
               "actions": {
-                  "Startup" : "handleStartup"
+                  "Startup" : "handleStartup",
+                  "PrepareFab" : "prepareFabForDisplay"
               }
           }
       }
@@ -30,11 +61,17 @@
       "title" : "Fab Demo",
       "items": [
           "sayHello",
-          "updateHelloButton"
+          "updateHelloButton",
+          "-",
+          "hideHelloButton",
+          "showHelloButton",
+          "-",
+          "hideAllButtons",
+          "showAllButtons"
       ]
   },
   "identifier" : "com.abynim.FabDemo",
-  "version" : "0.1",
+  "version" : "0.2",
   "icon" : "icon.png",
   "description" : "A demo plugin for adding a floating button on the canvas",
   "author" : "Aby Nimbalkar",
