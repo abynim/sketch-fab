@@ -71,7 +71,7 @@
       ]
   },
   "identifier" : "com.abynim.FabDemo",
-  "version" : "0.2",
+  "version" : "0.3",
   "icon" : "icon.png",
   "description" : "A demo plugin for adding a floating button on the canvas",
   "author" : "Aby Nimbalkar",
